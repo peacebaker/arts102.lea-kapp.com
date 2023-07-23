@@ -2,7 +2,21 @@
 	import ColorSquare from "../lib/ColorSquare.svelte";
   import "@fontsource/fira-sans";
   import "normalize.css";
+	import { slide } from "svelte/transition";
 
+  // 
+  let navOpen = true;
+  let screenSize;
+
+  // 
+  function toggleNav() {
+    if (navOpen) {
+      navOpen = false;
+    } else {
+      navOpen = true;
+    }
+  }
+ 
   /**
    * Create an array of integers beginning at the "start number" and counting down until the end number.
    * @param start
@@ -16,77 +30,84 @@
     }
     return nums;
   }
-
 </script>
 
 <div class="container">
   <nav>
-    <ul>
-      <li>
-        <a href="#first-day">First Day</a>
-      </li>
-      <li>
-        <a href="#elements-of-design">Elements of Design</a>
-      </li>
-      <ul>
-        <li>
-          <a href="#line">Line</a>
-        </li>
-        <li>
-          <a href="#texture">Texture</a>
-        </li>
-        <li>
-          <a href="#shape">Shape</a>
-        </li>
-        <li>
-          <a href="#form">Form</a>
-        </li>
-        <li>
-          <a href="#space">Space</a>
-        </li>
-        <li>
-          <a href="#value">Value</a>
-        </li>
-        <li>
-          <a href="#color">Color</a>
-        </li>
-      </ul>
-      <li>
-        <a href="#principles-of-design">Principles of Design</a>
-      </li>
-      <ul>
-        <li>
-          <a href="#balance">Balance</a>
-        </li>
-        <li>
-          <a href="#repetition-rhythm-pattern">Repetition, Rhythm, and Pattern</a>
-        </li>
-        <li>
-          <a href="#emphasis-contrast">Emphasis and Contrast</a>
-        </li>
-        <li>
-          <a href="#proportion-scale">Proportion and Scale</a>
-        </li>
-        <li>
-          <a href="#movement">Movement</a>
-        </li>
-        <li>
-          <a href="#unity">Unity</a>
-        </li>
-      </ul>
-      <li>
-        <a href="#rgb-color-theory">Bonus:  RGB Color Theory</a>
-      </li>
-      <ul>
-        <li>
-          <a href="#color-wheel">Color Wheel</a>
-        </li>
-        <li>
-          <a href="#color-mixing">Color Mixing</a>
-        </li>
-      </ul>
-    </ul>
+    <button on:click={toggleNav}>{#if navOpen}&uarr;{:else}&darr;{/if}</button>
+    {#if navOpen}
+      <div transition:slide>
+        <ul>
+          <a href="#first-day">
+            <li>First Day</li>
+          </a>
+          <a href="#elements-of-design">
+            <li>Elements of Design</li>
+          </a>
+          <ul>
+            <a href="#line">
+              <li>Line</li>
+            </a>
+            <a href="#texture">
+              <li>Texture</li>
+            </a>
+            <a href="#shape">
+              <li>Shape</li>
+            </a>
+            <a href="#form">
+              <li>Form</li>
+            </a>
+            <a href="#space">
+              <li>Space</li>
+            </a>
+            <a href="#value">
+              <li>Value</li>
+            </a>
+            <a href="#color">
+              <li>Color</li>
+            </a>
+          </ul>
+          <a href="#principles-of-design">
+            <li>
+              Principles of Design
+            </li>
+          </a>
+          <ul>
+            <a href="#balance">
+              <li>Balance</li>
+            </a>
+            <a href="#repetition-rhythm-pattern">
+              <li>Repetition, Rhythm, and Pattern</li>
+            </a>
+            <a href="#emphasis-contrast">
+              <li>Emphasis and Contrast</li>
+            </a>
+            <a href="#proportion-scale">
+              <li>Proportion and Scale</li>
+            </a>
+            <a href="#movement">
+              <li>Movement</li>
+            </a>
+            <a href="#unity">
+              <li>Unity</li>
+            </a>
+          </ul>
+          <a href="#rgb-color-theory">
+            <li>Bonus:  RGB Color Theory</li>
+          </a>
+          <ul>
+            <a href="#color-wheel">
+              <li>Color Wheel</li>
+            </a>
+            <a href="#color-mixing">
+              <li>Color Mixing</li>
+            </a>
+          </ul>
+        </ul>
+      </div>
+    {/if}
   </nav>
+
 
   <main>
     <div class="text">
@@ -172,8 +193,10 @@
       <h2 id="texture">Texture</h2>
       <p>Texture describes how a surface feels, or how it would feel if you were allowed to touch it without getting kicked out of the art gallery.  Do not touch the art without explicit permission.  They do not like that.  Like lines, textures don't need to be real – they can also be implied.  When texture describes something intangible, it describes how we imagine it would feel if it were to become a tangible object.</p>
     </div>
-
-    [Transition between carpet and hardwood in the kitchen.]
+    <img src="marbles.jpg" alt="six transparent, blue marbles">
+    <div class="credit">
+      [pxfuel.com, Undated]
+    </div>
 
     <div class="text">
       <h2 id="shape">Shape</h2>
@@ -333,7 +356,7 @@
     </div>
     <img src="ai_lofi_girl.jpg" alt="an anime-style girl studying at her desk doing homework">
     <div class="credit">
-      <a href="https://www.freepik.com/free-ai-image/cartoon-lofi-young-manga-style-girl-studying-while-listening-music-raining-street-ai-generative_43227423.htm#query=digital%20art&position=1&from_view=search&track=ais">Image By chandlervid85</a>
+      [<a href="https://www.freepik.com/free-ai-image/cartoon-lofi-young-manga-style-girl-studying-while-listening-music-raining-street-ai-generative_43227423.htm#query=digital%20art&position=1&from_view=search&track=ais">Image By chandlervid85</a>]
     </div>
 
     <div class="text">
@@ -346,7 +369,7 @@
       <h2 id="movement">Movement</h2>
       <p>Movement is a little confusing nowadays because modern art is frequently animated.  When you add the dimension of time to an art piece, literal movement becomes possible, but in the context of the principles of design, we aren't talking about the art moving.  Instead, in this context, movement refers to the path that the viewer's eye takes through the composition.  Movement is typically directed via lines, edges, shapes, and colors.</p>
     </div>
-    <img src="arrows.png" alt="a series of arrows pointing left">
+    <img class="white-background" src="arrows.png" alt="a series of arrows pointing left">
     <div class="credit">
       [HiClipart, Undated]
     </div>
@@ -419,7 +442,6 @@
       <p>Unfortunately, these colors aren't so good to work with unless you plan on blinding someone, so you'll almost always want to desaturate them.  Since desaturation requires some complicated math, I recommend HSL notation.  HSL stands for Hue, Saturation, and Lightness (value), and you can set each of these values individually.  Hue refers to the color, as measured by an angle around a circular color wheel.</p>
       <p>But that's a different class.</p>
     </div>
-
   </main>
 </div>
 
@@ -428,14 +450,127 @@
     margin: 0px;
     font-family: "Fira Sans";
     box-sizing: border-box;
-    background-color: hsl(240, 20%, 20%);
-    color: hsl(0, 0%, 90%)
+    background-color: hsl(240, 30%, 15%);
+    color: hsl(0, 0%, 90%);
   }
   .container {
     display: grid;
     grid-template-areas:
       "nav"
-      "main"
+      "main";
+  }
+  @media only screen and (min-width: 520px) {
+    .container {
+      grid-template-columns: 1fr 520px 1fr;
+      grid-template-areas:
+      "nav nav nav"
+      "left main right";
+    }
+  }
+  
+  @media only screen and (min-width: 800px) {
+    .container {
+      grid-template-columns: 280px 2fr minmax(520px, 660px) 3fr;
+      grid-template-areas:
+      "nav left main right";
+    }
+    nav {
+      top: 0;
+      max-height: 100vh;
+      overflow-y: auto;
+      position: sticky;
+    }
+    nav > button {
+      display: none;
+    }
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    background-image: linear-gradient(hsl(210, 40%, 8%), hsl(210, 40%, 10%), hsl(210, 40%, 8%));
+    color: hsl(210, 90%, 90%);
+    border: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-top: .3em;
+    padding-bottom: .3em;
+  }
+
+  nav {
+    grid-area: nav;
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    /* transition: height .5s; */
+  }
+  nav ul {
+    padding-left: 0;
+  }
+  nav li {
+    padding-top: .6em;
+    padding-bottom: .6em;
+  }
+  nav a {
+    display: block;
+    color: hsl(210, 90%, 90%);
+  }
+  nav a:visited {
+    color: hsl(180, 90%, 90%);
+  }
+  nav a:hover {
+    color: hsl(195, 80%, 90%);
+  }
+  
+  nav > div > ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  nav > div > ul > a {
+    /* background-image: linear-gradient(hsl(210, 40%, 18%), hsl(210, 40%, 20%), hsl(210, 40%, 18%)); */
+    background-color: hsl(210, 40%, 20%);
+  }
+  nav > div > ul > a:hover {
+    /* background-image: linear-gradient(hsl(210, 40%, 70%), hsl(210, 40%, 80%), hsl(210, 40%, 70%)); */
+    background-color: hsl(210, 40%, 80%);
+    color: hsl(0, 0%, 5%)
+  }
+  nav > div > ul > a > li {
+    display: block;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  nav > div > ul > ul > a {
+    /* background-image: linear-gradient(hsl(210, 40%, 22%), hsl(210, 40%, 24%), hsl(210, 40%, 22%)); */
+    background-color: hsl(210, 40%, 24%);
+  }
+  nav > div > ul > ul > a:hover {
+    /* background-image: linear-gradient(hsl(210, 40%, 70%), hsl(210, 40%, 85%), hsl(210, 40%, 70%)); */
+    background-color: hsl(210, 40%, 85%);
+    color: hsl(0, 0%, 5%)
+  }
+  nav > div > ul > ul > a > li {
+    display: block;
+    padding-left: 2em;
+    padding-right: 1em;
+  }
+
+  main {
+    grid-area: main;
+    box-sizing: border-box;
+    background-color:hsl(240, 30%, 10%);
+  }
+
+  a {
+    color: hsl(210, 90%, 50%);
+    text-decoration: none;
+    scroll-behavior: smooth;
+  }
+  a:visited {
+    color: hsl(180, 90%, 40%);
+  }
+  a:hover {
+    color: hsl(195, 80%, 80%);
   }
 
   .color-row {
@@ -447,20 +582,26 @@
   h1 {
     font-size: 2.5em;
     letter-spacing: -2%;
-    margin-top: 1em;
-    margin-bottom: -.2em;
+    margin-top: 3em;
+    margin-bottom: 1em;
     text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
   }
   h2 {
     font-size: 1.8em;
     letter-spacing: -1%;
-    margin-top: 1em;
+    margin-top: 1.8em;
     margin-bottom: -.2em;
     text-align: center;
   }
+  p {
+    line-height: 1.5em;
+    padding-top: .6em;
+  }
   .text {
-    padding-left: .4em;
-    padding-right: .4em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
   .credit {
     text-align: center;
@@ -471,7 +612,7 @@
   }
 
   img {
-    width: 100vw;
+    width: 100%;
   }
   .white-background {
     background-color: hsl(0, 0%, 90%);
@@ -482,6 +623,7 @@
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
   }
   .iframe-wrapper iframe {
+    box-sizing: content-box;
     position: absolute;
     top: 0;
     left: 0;
